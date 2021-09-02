@@ -2,24 +2,20 @@
 #include <chrono>
 #include "thread_pool/thread_pool.h"
 
-#if __cplusplus >= 201703L
-    using namespace std::chrono_literals;
-#else
-constexpr std::chrono::milliseconds operator"" ms(unsigned long long value) noexcept {
+constexpr std::chrono::milliseconds operator"" _ms(unsigned long long value) noexcept {
     return std::chrono::milliseconds(value);
 }
-#endif
 
 int main() {
     thread_pool         pool;
 
     auto work = [](const char *name) {
-        std::this_thread::sleep_for(500ms);
+        std::this_thread::sleep_for(500_ms);
         printf("Hello %s!\n", name);
     };
 
     auto task = [](int a, int b) {
-        std::this_thread::sleep_for(500ms);
+        std::this_thread::sleep_for(500_ms);
         return a + b;
     };
 
